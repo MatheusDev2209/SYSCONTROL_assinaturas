@@ -197,7 +197,7 @@
       </div>
       <div class="modal-body">
         <!-- Formulário para adicionar novo cliente -->
-        <form id="formcadastro" method="post" action="cad_cliente.php">
+        <form id="formcadastro" method="post" action="php/registercliente.php">
           <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" class="form-control" id="nome" class="nome" name="nome" placeholder="Digite o nome do cliente" required>
@@ -212,7 +212,13 @@
           </div>
           <div class="form-group">
             <label for="servico">Serviço</label>
-            <input type="text" class="form-control" id="servico" class="servico" name="servico" placeholder="Digite o serviço do cliente" required>
+            <select class="form-select" aria-label="Default select example">
+             <option selected id="servico" class="servico">Selecione.</option>
+             <option value="1">IPTV</option>
+             <option value="2">P2P</option>
+             <option value="3">OTS</option>
+             <option value="4">SSIPTV</option>
+             </select>
           </div>
           <div class="form-group">
             <label for="usuario">Usuário</label>
@@ -223,8 +229,20 @@
             <input type="text" class="form-control" id="senha" class="senha" name="senha" placeholder="Digite a senha do cliente" required>
           </div>
           <div class="form-group">
-            <label for="servico">Plano</label>
-            <input type="plano" class="form-control" id="servico" class="servico" name="servico" placeholder="Digite o serviço do cliente" required>
+            <label for="servico">Planos</label>
+            <select class="form-select" aria-label="Default select example">
+             <option selected id="plano" class="plano">Selecione.</option>
+             <option value="1">Mensal</option>
+             <option value="2">Bimestral</option>
+             <option value="3">Trimestral</option>
+             <option value="4">Semestral</option>
+             <option value="5">Anual</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="valorplano">Valor do Plano</label>
+            <input type="text" class="form-control" id="valorplano" class="valorplano" name="valorplano" placeholder="Digite o Valor do plano do cliente" required>
           </div>
 
         </form>
