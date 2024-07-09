@@ -3,18 +3,27 @@ include("conexao.php");
 
 // Receber os dados do formulário via POST
 $nome = $_POST['nome'];
-$WMAIL = $_POST['sobrenome'];
 $email = $_POST['email'];
-$senha = $_POST['senha']; // Lembre-se de implementar hash de senha seguro em produção
+$telefone = $_POST['telefone'];
+$servivo = $_POST['servico'];
 $usuario = $_POST['usuario'];
+$senha = $_POST['senha']; 
+$plano = $_POST['plano'];
+$valorplano = $_POST['valorplano'];
 
-//$nome = "matheus";
-//$sobrenome = "Henrique";
-//$email = "amhenrique157@gmail.com";
-//$senha = "@Srvsa2022";
+
+//$nome = "João Henrique";
+//$email = "teste@gmail.com";
+//$telefone = "88996723053";
+//$servivo = "IPTV";
+//$usuario = "094933801";
+//$senha = "506708930"; 
+//$plano = "Mensal";
+//$valorplano = "30,00";
+//$datacad = now();
 
 // Inserir os dados na tabela do banco de dados
-$sql = "INSERT INTO cliente (nome, email, telefone, servico, usuario_serv, senha, plano, valorplano, datacadastro) VALUES ('$nome', '$sobrenome', '$email', '$senha', '$usuario')";
+$sql = "INSERT INTO clientes (nome, email, telefone, servico, usuario_serv, senha, plano, valorplano, datacadastro) VALUES ('$nome', '$email', '$telefone', '$servivo', '$usuario', '$senha', '$plano', '$valorplano', now())";
 
 if ($conn->query($sql) === TRUE) {
     
@@ -48,10 +57,7 @@ $conn->close();
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <?php if ($cadastro_sucesso): ?>
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Cadastro realizado com sucesso!</h4>
-                        <p>Seu cadastro foi concluído com êxito. Você será redirecionado para a página de login em breve.</p>
-                    </div>
+                    
                 <?php else: ?>
                     <div class="alert alert-danger" role="alert">
                         <h4 class="alert-heading">Erro no cadastro!</h4>
@@ -67,4 +73,3 @@ $conn->close();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
