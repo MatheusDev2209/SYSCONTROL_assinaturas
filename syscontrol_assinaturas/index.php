@@ -62,7 +62,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="cad_cliente.php">Cadastro</a>
+                                    <a class="nav-link" href="clienteindex.php">Cadastro</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Renovações</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Cancelamentos</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Adesão</a>

@@ -6,7 +6,7 @@ $password = ""; // sua senha do MySQL
 $dbname = "sc_assinatura"; // nome do banco de dados que você criou
 
 // Conectar ao banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn =  mysqli_connect($servername, $username, $password, $dbname);
 
 // Verificar a conexão
 if ($conn->connect_errno) {

@@ -4,7 +4,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,10 @@
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+          
 <style>
   td,tr{
     text-align: center;
@@ -133,9 +136,10 @@
 <!--<div class="container mt-5">-->  
   <!-- Botão para adicionar novo cliente -->
   <div class="text-right mb-3">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNovoCliente">Novo Cliente</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUsuarioModal">Novo Cliente</button>
   </div>
-  
+  	<span id="msg"></span>
+    <span id="conteudo"></span><br>
   <!-- Tabela de Clientes -->
   <table class="table table-striped">
     <thead>
@@ -188,71 +192,72 @@
 </div>
 
 <!-- Modal Novo Cliente -->
-<div class="modal fade" id="modalNovoCliente" tabindex="-1" role="dialog" aria-labelledby="modalNovoClienteLabel" aria-hidden="true">
+<div class="modal fade" id="addUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="modalNovoClienteLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalNovoClienteLabel">Novo Cliente</h5>
+        <h5 class="modal-title" id="addUsuarioModalLabel">Novo Cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <!-- Formulário para adicionar novo cliente -->
-        <form id="formcadastro" method="post" action="php/registercliente.php">
+        <span id="msg-error"></span>
+        <form id="insert_form" method="post" action="php/registercliente.php">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" class="form-control" id="nome" class="nome" name="nome" placeholder="Digite o nome do cliente" required>
+            <input type="text" class="form-control" id="nome" class="form-control" name="nome" placeholder="Digite o nome do cliente" >
           </div>
           <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" class="email" name="email" placeholder="Digite o e-mail do cliente" required>
+            <input type="email" class="form-control" id="email" class="form-control" name="email" placeholder="Digite o e-mail do cliente" >
           </div>
           <div class="form-group">
             <label for="telefone">Telefone</label>
-            <input type="text" class="form-control" id="telefone" class="telefone" name="telefone" placeholder="Digite o telefone do cliente" required>
+            <input type="text" class="form-control" id="telefone" class="form-control" name="telefone" placeholder="Digite o telefone do cliente" >
           </div>
           <div class="form-group">
             <label for="servico">Serviço</label>
-            <select class="form-select" aria-label="Default select example">
-             <option selected id="servico" class="servico">Selecione.</option>
-             <option value="1">IPTV</option>
-             <option value="2">P2P</option>
-             <option value="3">OTS</option>
-             <option value="4">SSIPTV</option>
+            <select class="form-select" aria-label="Default select example" id="servico" class="form-control" name="servico">
+             <option selected>Selecione.</option>
+             <option value="IPTV">IPTV</option>
+             <option value="P2P">P2P</option>
+             <option value="OTS">OTS</option>
+             <option value="SSIPTV">SSIPTV</option>
              </select>
           </div>
           <div class="form-group">
             <label for="usuario">Usuário</label>
-            <input type="text" class="form-control" id="usuario" class="usuario" name="ususario" placeholder="Digite o usuario do cliente" required>
+            <input type="text" class="form-control" id="usuario" class="form-control" name="usuario" placeholder="Digite o usuario do cliente" >
           </div>
           <div class="form-group">
             <label for="senha">Senha</label>
-            <input type="text" class="form-control" id="senha" class="senha" name="senha" placeholder="Digite a senha do cliente" required>
+            <input type="text" class="form-control" id="senha" class="senha" name="senha" placeholder="Digite a senha do cliente" >
           </div>
           <div class="form-group">
             <label for="servico">Planos</label>
-            <select class="form-select" aria-label="Default select example">
-             <option selected id="plano" class="plano">Selecione.</option>
-             <option value="1">Mensal</option>
-             <option value="2">Bimestral</option>
-             <option value="3">Trimestral</option>
-             <option value="4">Semestral</option>
-             <option value="5">Anual</option>
+            <select class="form-select" aria-label="Default select example" id="plano" name="plano" class="form-control">
+             <option selected class="plano">Selecione.</option>
+             <option value="Mensal">Mensal</option>
+             <option value="Bimestral">Bimestral</option>
+             <option value="Trimestral">Trimestral</option>
+             <option value="Semestral">Semestral</option>
+             <option value="Anual">Anual</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="valorplano">Valor do Plano</label>
-            <input type="text" class="form-control" id="valorplano" class="valorplano" name="valorplano" placeholder="Digite o Valor do plano do cliente" required>
+            <input type="text" class="form-control" id="valorplano" class="valorplano" name="valorplano" placeholder="Digite o Valor do plano do cliente" >
           </div>
-
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <input type="submit" name="CadUser" id="CadUser" value="Cadastrar" class="btn btn-outline-success">
+           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#successModal">Salvar</button>
-      </div>
+      
     </div>
   </div>
 </div>  
@@ -277,7 +282,7 @@
     </div>
   </div>
 </div>
-   
+
 <!-- Modal Editar Cliente -->
 <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="modalEditarClienteLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -349,5 +354,95 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+
+<script>
+			var qnt_result_pg = 50; //quantidade de registro por página
+			var pagina = 1; //página inicial
+			$(document).ready(function () {
+				listar_usuario(pagina, qnt_result_pg); //Chamar a função para listar os registros
+			});
+			
+			function listar_usuario(pagina, qnt_result_pg){
+				var dados = {
+					pagina: pagina,
+					qnt_result_pg: qnt_result_pg
+				}
+				$.post('listar_usuario.php', dados , function(retorna){
+					//Subtitui o valor no seletor id="conteudo"
+					$("#conteudo").html(retorna);
+				});
+			}
+			//Até aqui faz listar usuarios
+			
+			$(document).ready(function(){
+				$(document).on('click','.view_data', function(){
+					var user_id = $(this).attr("id_cli");
+					//alert(user_id);
+					//Verificar se há valor na variável "user_id".
+					if(user_id !== ''){
+						var dados = {
+							user_id: user_id
+						};
+						$.post('php/visualizar.php', dados, function(retorna){
+							//Carregar o conteú do para o usuário
+							$("#visul_usuario").html(retorna);
+							$('#visulUsuarioModal').modal('show'); 
+						});
+					}
+				});
+				
+				$('#insert_form').on('submit', function(event){
+					event.preventDefault();
+					if($('#nome').val() == ""){
+						//Alerta de campo nome vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo nome!</div>');
+					}else if($('#email').val() == ""){
+						//Alerta de campo email vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo e-mail!</div>');						
+          }else if($('#telefone').val() == ""){
+						//Alerta de campo telefone vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo telefone!</div>');						
+					}else if($('#servico').val() == "Selecione."){
+						//Alerta de campo servico nao selecionado
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário selecionar um serviço!</div>');						
+					}else if($('#usuario').val() == ""){
+						//Alerta de campo usuario vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo usuário!</div>');						
+					}else if($('#senha').val() == ""){
+						//Alerta de campo senha vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo senha!</div>');						
+					}else if($('#plano').val() == "Selecione."){
+						//Alerta de campo plano nao selecionado
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário selecionar um plano!</div>');						
+					}else if($('#valorplano').val() == ""){
+						//Alerta de campo valor do plano nao selecionado
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário preencher o valor do plano!</div>');						
+					}else{
+						//Receber os dados do formulário
+						var dados = $("#insert_form").serialize();
+						$.post("php/registercliente.php", dados, function (retorna){
+							if(retorna){
+								//Alerta de cadastro realizado com sucesso
+								$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>');
+								
+								//Limpar os campo
+								$('#insert_form')[0].reset();
+								
+								//Fechar a janela modal cadastrar
+								$('#addUsuarioModal').modal('hide');
+								
+								//Limpar mensagem de erro
+								$("#msg-error").html('');	
+								
+								listar_usuario(1, 50);
+							}else{
+								
+							}
+							
+						});
+					}
+				});
+			});
+		</script>
 </body>
 </html>
